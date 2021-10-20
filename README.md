@@ -5,3 +5,5 @@
  1. Load the war3map.wts file of your map.
  2. Choose the place and name of the save file.
  3. Choose the other options and press start.
+
+It only converts to typescript variables.
