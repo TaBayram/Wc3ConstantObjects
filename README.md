@@ -1,5 +1,6 @@
 # Wc3ObjectsConverter
- Convert custom wc3 objects' (units,abilities etc.) IDs to variables. (Example: Bash Ability with (A001) code will be convertes as export const Bash = FourCC("A001");)
+ Convert custom wc3 objects' (units,abilities etc.) IDs to variables. 
+ (Example: Bash Ability with (A001) code will be convertes as export const Bash = FourCC("A001");)
  How to:
  1. Load the war3map.wts file of your map.
  2. Choose the place and name of the save file.
