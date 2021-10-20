@@ -251,7 +251,7 @@ namespace Wc3ConstantObjects
             this.MaximumSize = new System.Drawing.Size(375, 275);
             this.MinimumSize = new System.Drawing.Size(350, 250);
             this.Name = "MainForm";
-            this.Text = "Warcraft Objects ";
+            this.Text = "Warcraft Objects Converter ";
             this.groupBoxOrder.ResumeLayout(false);
             this.groupBoxOrder.PerformLayout();
             this.ResumeLayout(false);
