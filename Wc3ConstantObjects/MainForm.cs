@@ -103,7 +103,7 @@ namespace Wc3ConstantObjects
                 fileStream.Close();
 
                 Converter converter = new Converter(backgroundWorkerReader);
-                string constants = converter.ListToFile(converter.CreateWarcraftObjectList(content,wc3Classes,checkBoxAddInitial.Checked,checkBoxRemoveColor.Checked),radioButtonFourCC.Checked);
+                string constants = converter.ListToFile(converter.CreateWarcraftObjectList(content,wc3Classes,checkBoxAddInitial.Checked,checkBoxRemoveColor.Checked,checkBoxDuplicate.Checked),radioButtonFourCC.Checked);
 
                 fileStream = File.Open(savePath, FileMode.Create, FileAccess.ReadWrite);
                 streamWriter = new StreamWriter(fileStream);

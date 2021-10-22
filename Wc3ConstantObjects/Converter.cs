@@ -18,7 +18,7 @@ namespace Wc3ConstantObjects
 
 
 
-        public List<WarcraftObject> CreateWarcraftObjectList(in string content,List<Wc3Class> wc3Classes,bool addInitial,bool removeRGB)
+        public List<WarcraftObject> CreateWarcraftObjectList(in string content,List<Wc3Class> wc3Classes,bool addInitial,bool removeRGB,bool fixDup)
         {
             List<WarcraftObject> warcraftObjects = new List<WarcraftObject>();
             string constants = "";
@@ -50,7 +50,7 @@ namespace Wc3ConstantObjects
                     }
 
                     WarcraftObject warcraftObj = new WarcraftObject(type.Type,fourCC, name, editorSuffix,addInitial, removeRGB);
-                    if (IsNewModify(warcraftObjects, warcraftObj))
+                    if (IsNewModify(warcraftObjects, warcraftObj,fixDup))
                         warcraftObjects.Add(warcraftObj);
                     i = closingToName;
                     if (progress + 1 < (float)i / content.Length * 80)
@@ -86,7 +86,7 @@ namespace Wc3ConstantObjects
             return content;
         }
 
-        private bool IsNewModify(in List<WarcraftObject> warcraftObjects,in WarcraftObject warcraftObj)
+        private bool IsNewModify(in List<WarcraftObject> warcraftObjects,in WarcraftObject warcraftObj,bool fixDup)
         {
             foreach (WarcraftObject warcraftObject in warcraftObjects)
             {
@@ -94,6 +94,7 @@ namespace Wc3ConstantObjects
                 {
                     return false;
                 }
+                if (!fixDup) continue;
                 else if (warcraftObj.VariableName == warcraftObject.VariableName)
                 {
                     if (!warcraftObj.AddSuffix)

@@ -48,6 +48,7 @@ namespace Wc3ConstantObjects
             this.groupBoxOrder = new System.Windows.Forms.GroupBox();
             this.checkBoxRemoveColor = new System.Windows.Forms.CheckBox();
             this.toolTipMain = new System.Windows.Forms.ToolTip(this.components);
+            this.checkBoxDuplicate = new System.Windows.Forms.CheckBox();
             this.groupBoxOrder.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -232,12 +233,26 @@ namespace Wc3ConstantObjects
             this.toolTipMain.AutomaticDelay = 200;
             this.toolTipMain.ToolTipTitle = "?";
             // 
+            // checkBoxDuplicate
+            // 
+            this.checkBoxDuplicate.AutoSize = true;
+            this.checkBoxDuplicate.Checked = true;
+            this.checkBoxDuplicate.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxDuplicate.Location = new System.Drawing.Point(138, 105);
+            this.checkBoxDuplicate.Name = "checkBoxDuplicate";
+            this.checkBoxDuplicate.Size = new System.Drawing.Size(92, 17);
+            this.checkBoxDuplicate.TabIndex = 12;
+            this.checkBoxDuplicate.Text = "Fix Duplicates";
+            this.toolTipMain.SetToolTip(this.checkBoxDuplicate, "Tries to rename duplicates using editor suffix and fourcc id");
+            this.checkBoxDuplicate.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
             this.ClientSize = new System.Drawing.Size(348, 211);
+            this.Controls.Add(this.checkBoxDuplicate);
             this.Controls.Add(this.checkBoxRemoveColor);
             this.Controls.Add(this.groupBoxOrder);
             this.Controls.Add(this.checkBoxAddInitial);
@@ -279,6 +294,7 @@ namespace Wc3ConstantObjects
         private System.Windows.Forms.GroupBox groupBoxOrder;
         private System.Windows.Forms.CheckBox checkBoxRemoveColor;
         private System.Windows.Forms.ToolTip toolTipMain;
+        private System.Windows.Forms.CheckBox checkBoxDuplicate;
     }
 }
 
