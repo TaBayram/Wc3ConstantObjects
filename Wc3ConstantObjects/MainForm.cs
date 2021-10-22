@@ -62,12 +62,18 @@ namespace Wc3ConstantObjects
             try
             {
                 //ReadFile();
+                buttonLoad.Enabled = false;
+                buttonSave.Enabled = false;
+                buttonStart.Enabled = false;
                 backgroundWorkerReader.RunWorkerAsync();
             }
             catch (Exception exception)
             {
                 ShowError(exception);
                 progressBarMain.Value = 0;
+                buttonLoad.Enabled = true;
+                buttonSave.Enabled = true;
+                buttonStart.Enabled = true;
             }
                    
             
@@ -161,8 +167,11 @@ namespace Wc3ConstantObjects
             {
                 progressBarMain.Value = 100;
                 MessageBox.Show("Success!");
+
             }
-            
+            buttonLoad.Enabled = true;
+            buttonSave.Enabled = true;
+            buttonStart.Enabled = true;
         }
 
         private void buttonSave_Click(object sender, EventArgs e)
