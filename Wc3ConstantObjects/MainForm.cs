@@ -16,6 +16,10 @@ namespace Wc3ConstantObjects
         string loadPath;
         string savePath;
         string constant;
+
+
+        public delegate void UpdateThread(int v);
+        public UpdateThread threadUpdate;
         public MainForm()
         {
             InitializeComponent();
@@ -31,6 +35,8 @@ namespace Wc3ConstantObjects
                 savePath = saveSaved;
                 textBoxSave.Text = saveSaved;
             }
+
+            threadUpdate = new UpdateThread(UpdateThreadProgress);
 
         }
 
@@ -102,8 +108,8 @@ namespace Wc3ConstantObjects
                 streamReader.Close();
                 fileStream.Close();
 
-                Converter converter = new Converter(backgroundWorkerReader);
-                string constants = converter.ListToFile(converter.CreateWarcraftObjectList(content,wc3Classes,checkBoxAddInitial.Checked,checkBoxRemoveColor.Checked,checkBoxDuplicate.Checked),radioButtonFourCC.Checked);
+                Converter converter = new Converter(backgroundWorkerReader, this);
+                string constants = converter.ListToFile(converter.CreateWarcraftObjectList(content,wc3Classes), checkBoxAddInitial.Checked, checkBoxRemoveColor.Checked, checkBoxDuplicate.Checked, radioButtonFourCC.Checked);
 
                 fileStream = File.Open(savePath, FileMode.Create, FileAccess.ReadWrite);
                 streamWriter = new StreamWriter(fileStream);
@@ -181,6 +187,11 @@ namespace Wc3ConstantObjects
                 savePath = saveFileDialog.FileName;
                 textBoxSave.Text = savePath;
             }
+        }
+
+
+        internal void UpdateThreadProgress(int v) {
+            progressBarThreads.Value = v;
         }
     }
 }

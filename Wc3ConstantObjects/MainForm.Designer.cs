@@ -49,6 +49,7 @@ namespace Wc3ConstantObjects
             this.checkBoxRemoveColor = new System.Windows.Forms.CheckBox();
             this.toolTipMain = new System.Windows.Forms.ToolTip(this.components);
             this.checkBoxDuplicate = new System.Windows.Forms.CheckBox();
+            this.progressBarThreads = new System.Windows.Forms.ProgressBar();
             this.groupBoxOrder.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -147,7 +148,7 @@ namespace Wc3ConstantObjects
             // 
             this.progressBarMain.Location = new System.Drawing.Point(12, 175);
             this.progressBarMain.Name = "progressBarMain";
-            this.progressBarMain.Size = new System.Drawing.Size(230, 23);
+            this.progressBarMain.Size = new System.Drawing.Size(230, 11);
             this.progressBarMain.TabIndex = 9;
             // 
             // checkedListBoxObjects
@@ -246,12 +247,20 @@ namespace Wc3ConstantObjects
             this.toolTipMain.SetToolTip(this.checkBoxDuplicate, "Tries to rename duplicates using editor suffix and fourcc id");
             this.checkBoxDuplicate.UseVisualStyleBackColor = true;
             // 
+            // progressBarThreads
+            // 
+            this.progressBarThreads.Location = new System.Drawing.Point(12, 188);
+            this.progressBarThreads.Name = "progressBarThreads";
+            this.progressBarThreads.Size = new System.Drawing.Size(230, 11);
+            this.progressBarThreads.TabIndex = 13;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.ClientSize = new System.Drawing.Size(348, 211);
+            this.ClientSize = new System.Drawing.Size(348, 236);
+            this.Controls.Add(this.progressBarThreads);
             this.Controls.Add(this.checkBoxDuplicate);
             this.Controls.Add(this.checkBoxRemoveColor);
             this.Controls.Add(this.groupBoxOrder);
@@ -295,6 +304,7 @@ namespace Wc3ConstantObjects
         private System.Windows.Forms.CheckBox checkBoxRemoveColor;
         private System.Windows.Forms.ToolTip toolTipMain;
         private System.Windows.Forms.CheckBox checkBoxDuplicate;
+        private System.Windows.Forms.ProgressBar progressBarThreads;
     }
 }
 

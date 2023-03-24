@@ -9,61 +9,64 @@ namespace Wc3ConstantObjects
 {
     class WarcraftObject
     {
-        string fourCC;
+        public static bool addInitial;
+        public static bool addSuffix;
+        public static bool addTwoCC;
+
+
+        string id;
         string name;
-        string editorSuffix;
-        string variableName;
-        bool addInitial;
-        bool addSuffix;
-        bool addTwoCC;
+        string secondName = "";
+        string tooltip = "";
+        string tooltipExtended = "";
+        string editorSuffix = "";
+
+        public bool hasDuplicateName = false;
+
+
         Wc3Class.ObjectType objectType;
 
         public WarcraftObject()
         {
 
         }
-        public WarcraftObject(Wc3Class.ObjectType objectType,string fourCC, string name, string editorSuffix,bool addInitial,bool removeRGB)
+        public WarcraftObject(Wc3Class.ObjectType objectType,string fourCC, string name)
         {
             this.objectType = objectType;
-            this.fourCC = fourCC;
-            this.name = name;
-            this.editorSuffix = editorSuffix;
-            this.addSuffix = false;
-            this.addTwoCC = false;
-            this.addInitial = addInitial;
-            if (removeRGB)
-            {
-                this.name = RemoveARGB(this.name);
-                this.editorSuffix = RemoveARGB(this.editorSuffix);
-            }
-
-            UpdateVariableName();
+            this.id = fourCC;
+            this.Name = name.Trim();
         }
 
-        public string FourCC { get => fourCC; set => fourCC = value; }
+        public string ID { get => id; set => id = value; }
         public string Name { get => name; set => name = value; }
+        public string Tooltip { get => tooltip; set => tooltip = value; }
+        public string TooltipExtended { get => tooltipExtended; set => tooltipExtended = value; }
         public string EditorSuffix { get => editorSuffix; set => editorSuffix = value; }
-        public bool AddSuffix { get => addSuffix; set { addSuffix = value; UpdateVariableName();  } }
-        public bool AddTwoCC { get => addTwoCC; set { addTwoCC = value; UpdateVariableName(); } }
-        public string VariableName { get => variableName; set => variableName = value; }
+        public string SecondName { get => secondName; set => secondName = value; }
 
-        
-        private void UpdateVariableName()
+        public string ConvertTS(bool addInitial, bool removeColor)
         {
-            variableName =(addInitial?objectType.ToString().Substring(0,2):string.Empty)+ Variablize(Name, !addInitial) + (AddSuffix ? Variablize(editorSuffix) : string.Empty) + (AddTwoCC ? FourCC.Substring(2, 2) : string.Empty);
+            return "\n/**NAME:\t" + RemoveARGB(secondName)+ "\nTOOLTIP:\t" + RemoveARGB(tooltip) + " \nEXTENDED:\t" + RemoveARGB(tooltipExtended) + " \nSUFFIX:\t" + RemoveARGB(editorSuffix) + "*/ \n"+
+                "export const " + VariableName(addInitial, removeColor) + " = FourCC(\"" + id + "\");";
         }
 
-        public string ConvertTS()
-        {
-            return "export const " + VariableName + " = FourCC(\"" + fourCC + "\");";
+        public string VariableName(bool addInitial, bool removeColor) {
+            return 
+                (addInitial ? objectType.ToString().Substring(0, 2) : string.Empty) + 
+                Variablize(objectType == Wc3Class.ObjectType.upgrade ? secondName : Name, removeColor, !addInitial) + 
+                (hasDuplicateName ? id.Substring(2, 2) : string.Empty);
         }
 
-        private string Variablize(string name, bool startingString = false)
+        private string Variablize(string name, bool removeColor, bool startingString = false)
         {
+            if (name == "") name = editorSuffix;
+            if (name == "") name = tooltip;
+            if (name == "") name = id;
             string newName = "";
+            if(removeColor) name = RemoveARGB(name);
             Regex regex = new Regex("[^a-zA-Z0-9]");
             newName = regex.Replace(name, "");
-            if (startingString && Char.IsDigit(newName[0])) newName = newName.Insert(0, fourCC[0].ToString());
+            if (startingString && Char.IsDigit(newName[0])) newName = newName.Insert(0, id[0].ToString());
             return newName;
         }
 
